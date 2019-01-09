@@ -6,24 +6,32 @@ import NewsCard from './NewsCard.js';
 
 
 export default class Feed extends React.Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = { trend: '', feed: {} };
   }
 
   componentDidMount() {
+    this._isMounted = true;
     console.log('LINE: 15, Feed.js: this.props.trend: ', this.props.trend);
     return fetch(`https://newsapi.org/v2/everything?q=${this.props.trend}&apiKey=ae4f730913f9476f97ccdda19fffe2c4`)
       .then(response => response.json())
       .then((responseJson) => {
         const { articles } = responseJson;
-        this.setState({
-          feed: articles,
-        });
+        if (this._isMounted) {
+          this.setState({
+            feed: articles,
+          });
+        }
       })
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
 
