@@ -15,7 +15,7 @@ export default class Feed extends React.Component {
   componentDidMount() {
     this._isMounted = true;
     console.log('LINE: 15, Feed.js: this.props.trend: ', this.props.trend);
-    return fetch(`https://newsapi.org/v2/everything?q=${this.props.trend}&apiKey=ae4f730913f9476f97ccdda19fffe2c4`)
+    return fetch(`https://newsapi.org/v2/everything?q=${this.props.trend}&language=en&apiKey=ae4f730913f9476f97ccdda19fffe2c4`)
       .then(response => response.json())
       .then((responseJson) => {
         const { articles } = responseJson;
