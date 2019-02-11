@@ -39,6 +39,7 @@ export default class Trends extends React.Component {
       <View style={styles.container}>
 
         <FlatList
+          showsVerticalScrollIndicator={false}
           data={this.state.trends}
           keyExtractor={
             item => item
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 30,
     alignItems: 'center',
+    flexDirection: 'column',
   },
   header: {
     paddingBottom: 20,
