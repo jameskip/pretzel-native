@@ -29,6 +29,7 @@ class NewsCard extends React.Component {
       <TouchableHighlight
         key={key}
         style={styles.card}
+        underlayColor={'#f9d97a'}
         onPress={() => this.onForward(card.url)}
       >
         
