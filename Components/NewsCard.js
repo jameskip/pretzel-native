@@ -21,7 +21,7 @@ class NewsCard extends React.Component {
         onPress={() => Linking.openURL(card.url)}
       >
         
-          <View>
+          <View style={styles.view}>
             <Image source={{uri: card.urlToImage || 'https://cdn3.iconfinder.com/data/icons/kitchen-universe-4/140/12_pretzel-256.png'}} style={styles.image} />
             <Text key={key} style={styles.header}>
               {card.title}
@@ -87,7 +87,9 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    borderWidth: 2,
+    borderWidth: 1,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
     marginTop: 6,
     marginBottom: 6,
     marginLeft: 6,
@@ -103,6 +105,10 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignItems: 'flex-start',
     alignSelf: 'stretch',
+  },
+  view: {
+    overflow: 'hidden',
+    borderRadius: 23,
   }
 });
 
