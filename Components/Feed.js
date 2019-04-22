@@ -39,7 +39,7 @@ export default class Feed extends React.Component {
     console.log('LINE: 31, Feed.js: this.state.feed: ', this.state.feed);
     return (
       <View style={styles.container}>
-        <NewsCard feed={this.state.feed} />
+        <NewsCard navigator={this.props.navigator} feed={this.state.feed} />
       </View>
     );
   }

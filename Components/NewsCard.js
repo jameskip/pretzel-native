@@ -1,15 +1,26 @@
-import React from 'react';
+import React from 'react'
 import {
   View, ScrollView, Image, Text, ImageBackground, StyleSheet, Linking, TouchableHighlight,
-} from 'react-native';
+} from 'react-native'
+import Webview from './Webview.js'
 
 class NewsCard extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context)
+    this.onForward = this.onForward.bind(this)
+  }
+
+  onForward(url) {
+    const nextIndex = ++this.props.index;
+    this.props.navigator.push({
+      component: Webview,
+      title: url,
+      passProps: { navigator, index: nextIndex, url },
+    });
   }
 
   render() {
-    console.log('LINE: 24, NewsCard.js: this.props.feed: ', this.props.feed);
+    console.log('LINE: 24, NewsCard.js: this.props.feed: ', this.props.feed)
 
 
     const feed = this.props.feed;
@@ -18,7 +29,7 @@ class NewsCard extends React.Component {
       <TouchableHighlight
         key={key}
         style={styles.card}
-        onPress={() => Linking.openURL(card.url)}
+        onPress={() => this.onForward(card.url)}
       >
         
           <View style={styles.view}>
@@ -45,15 +56,6 @@ class NewsCard extends React.Component {
   }
 }
 
-// line 24
-
-{/* <ImageBackground
-style={styles.background}
-source={{uri: card.urlToImage || ''}}
-> */}
-
-// </ImageBackground>
-
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -61,8 +63,6 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     flex: 1,
-    // width: 300,
-    // justifyContent: 'center',
     flexDirection: 'column',
     backgroundColor: '#fff',
     alignSelf: 'stretch',
@@ -90,17 +90,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    marginTop: 6,
-    marginBottom: 6,
-    marginLeft: 6,
-    marginRight: 6,
+    borderBottomLeftRadius:10,
+    borderBottomRightRadius: 10,
+    paddingBottom: 5,
+    margin: 6,
+    marginBottom: 15,
     alignItems: 'center',
     flexDirection: 'column',
     borderColor: '#D3D3D3',
     overflow: 'scroll',
   },
   image: {
-    height: 200,
+    height: 180,
+    minWidth: '100%',
     paddingTop: 6,
     position: 'relative',
     alignItems: 'flex-start',
